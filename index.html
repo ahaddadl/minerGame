@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- getbootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <div id="presentation">
+      <div
+        class="presentation-overlay d-flex flex-column justify-content-center align-items-center text-white"
+      >
+        <div class="text-content text-center mb-4">
+          <h1 class="display-4">Gold Fever</h1>
+          <p class="lead">You are not alone! The gold has guardians.</p>
+          <button
+            id="startButtonGame"
+            class="btn btn-warning btn-lg start-button mt-3"
+          >
+            Start Game
+          </button>
+        </div>
+        <div class="background-image-container mt-4">
+          <img
+            src="/assets/images/Presentation_image.png"
+            alt="Game Background"
+            class="background-image"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div id="gameOver">
+      <div
+        class="presentation-overlay d-flex flex-column justify-content-center align-items-center text-white"
+      >
+      <div class="text-content text-center mb-4">
+        <h1 class="display-4">Game Over</h1>
+        <p class="lead">You are not alone! The gold has guardians.</p>
+        <button
+          id="play-again-button"
+          class="btn btn-warning btn-lg start-button mt-3"
+        >
+          Play agian
+        </button>
+      </div>
+      <div class="background-image-container mt-4">
+        <img
+          src="/assets/images/Presentation_image.png"
+          alt="Game Background"
+          class="background-image"
+        />
+      </div>
+    </div>
+    </div>
+
+    <div
+      id="score"
+      class="d-flex flex-column gap-3 position-relative"
+      style="padding-top: 100px"
+    >
+      <div id="hurra-hormiga" role="alert"></div>
+      <div id="hurra-oro" role="alert"></div>
+
+      <div class="card">
+        <div class="card-body fs-3 text-center">
+          Onzas de<span style="color: gold"> Oro</span>: 0 oz Euros: 0,0 €.
+        </div>
+      </div>
+      <canvas id="canvas" width="800" height="800"></canvas>
+    </div>
+
+    <!-- getbootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/assets/js/constants.js"></script>
+    <script src="/assets/js/cuadradoTierra.js"></script>
+    <script src="/assets/js/hormiga.js"></script>
+    <script src="/assets/js/gold.js"></script>
+    <script src="/assets/js/miner.js"></script>
+    <script src="/assets/js/game.js"></script>
+    <script src="/assets/js/index.js"></script>
+  </body>
+</html>
