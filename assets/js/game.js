@@ -15,9 +15,10 @@ class Game {
     }
 
     this.moreGolds = [
+      new Gold(ctx, this.cuadradosTierra, 1),
       new Gold(ctx, this.cuadradosTierra, 10),
-      new Gold(ctx, this.cuadradosTierra, 100),
     ];
+
     this.onza = 0;
 
     this.cuadradosVacios = [];
@@ -45,7 +46,7 @@ class Game {
         this.draw();
         this.move();
         this.checkCollisions();
-      }, 1000 / 40);
+      }, 1000 / 60);
       console.log("Game started");
     }
   }
@@ -76,8 +77,11 @@ class Game {
       cuadrado.draw();
     });
 
-    this.moreGolds.forEach((oro) => oro.draw());
-    // this.gold.draw();
+    this.moreGolds.forEach((oro) => {
+      oro.draw();
+      console.log("Drawing gold at:", oro.x, oro.y);
+    });
+
     this.miner.draw();
 
     this.hormigas.forEach((hormiga) => {
@@ -101,9 +105,11 @@ class Game {
   }
 
   addGold() {
-    const nuevoOro = new Gold(this.ctx, this.cuadradosTierra, 10);
+    const randomScores = [1, 2, 5];
+    const randomScore =
+      randomScores[Math.floor(Math.random() * randomScores.length)];
+    const nuevoOro = new Gold(this.ctx, this.cuadradosTierra, randomScore);
     this.moreGolds.push(nuevoOro);
-    console.log(nuevoOro, this.moreGolds);
   }
 
   posicionInicialHormiga() {
@@ -135,9 +141,7 @@ class Game {
   }
 
   onGoldCollected(oro) {
-    this.addGold();
-    this.addGold();
-    this.addGold();
+    console.log(this.moreGolds);
     this.addGold();
     const alertBox = document.getElementById("hurra-oro");
     alertBox.classList.add("alert", "alert-warning");
@@ -157,6 +161,9 @@ class Game {
     }, 1500);
 
     this.addhormiga();
+    this.addhormiga();
+
+    // console.log(this.moreGolds)
   }
 
   checkCollisions() {
@@ -164,14 +171,26 @@ class Game {
       (cuadrado) => !this.miner.collides(cuadrado)
     );
 
+    const collectedGolds = [];
+
     this.moreGolds = this.moreGolds.filter((oro) => {
       if (this.miner.collides(oro)) {
-        this.onGoldCollected(oro);
+        collectedGolds.push(oro);
         return false;
-      } else {
-        return true;
       }
+      return true;
     });
+
+    collectedGolds.forEach((oro) => this.onGoldCollected(oro));
+
+    // this.moreGolds = this.moreGolds.filter((oro) => {
+    //   if (this.miner.collides(oro)) {
+    //     this.onGoldCollected(oro);
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // });
 
     // if (this.miner.collides(this.gold)) {
     //   const alertBox = document.getElementById("hurra-oro");
@@ -236,7 +255,6 @@ class Game {
   }
 
   drawBackground() {
-    // Draw the background in the top half of the canvas
     this.ctx.drawImage(this.backgroundImage, 0, 0, 800, 100);
   }
 }

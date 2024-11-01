@@ -25,17 +25,17 @@ class Gold {
 
   draw() {
     switch (this.score) {
-      case 10:
+      case 2:
         this.ctx.fillStyle = "green";
         break;
-      case 100:
+      case 10:
         this.ctx.fillStyle = "red";
         break;
       default:
         this.ctx.fillStyle = "gold";
         break;
     }
-    this.ctx.fillStyle ='Gold'
+
     this.ctx.fillRect(this.x, this.y, this.w, this.h);
   }
 
