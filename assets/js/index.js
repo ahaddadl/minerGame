@@ -7,6 +7,11 @@ const game = new Game(ctx);
 
 // game.start();
 
+if (sessionStorage.getItem("gameStarted") === "true") {
+  document.getElementById("presentation").style.display = "none";
+  game.start();
+}
+
 const startButton = document.getElementById("startButtonGame");
 console.log(startButton);
 
@@ -16,7 +21,7 @@ startButton.addEventListener("click", (e) => {
   console.log(e);
   if (game.started === false) {
     document.getElementById("presentation").style.display = "none";
-  
+    sessionStorage.setItem("gameStarted", "true");
     game.start();
   } else {
     game.pause();
@@ -26,5 +31,11 @@ startButton.addEventListener("click", (e) => {
 const playAgainButton = document.getElementById("play-again-button");
 playAgainButton.addEventListener("click", (e) => {
   document.getElementById("gameOver").style.display = "none";
-  game.start();
+  location.reload();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const highestScore = parseFloat(localStorage.getItem("highestScore")) || 0;
+  document.getElementById("highest-score").innerText = `Highest Score: ${highestScore.toLocaleString("es-ES", { minimumFractionDigits: 2 })} €`;
+});
+

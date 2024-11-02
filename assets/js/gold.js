@@ -28,6 +28,9 @@ class Gold {
       case 2:
         this.ctx.fillStyle = "green";
         break;
+      case 5:
+        this.ctx.fillStyle = "blue";
+        break;
       case 10:
         this.ctx.fillStyle = "red";
         break;

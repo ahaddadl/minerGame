@@ -42,24 +42,24 @@
       <div
         class="presentation-overlay d-flex flex-column justify-content-center align-items-center text-white"
       >
-      <div class="text-content text-center mb-4">
-        <h1 class="display-4">Game Over</h1>
-        <p class="lead">You are not alone! The gold has guardians.</p>
-        <button
-          id="play-again-button"
-          class="btn btn-warning btn-lg start-button mt-3"
-        >
-          Play agian
-        </button>
+        <div class="text-content text-center mb-4">
+          <h1 class="display-4">Game Over</h1>
+          <p class="lead">You are not alone! The gold has guardians.</p>
+          <button
+            id="play-again-button"
+            class="btn btn-warning btn-lg start-button mt-3"
+          >
+            Play agian
+          </button>
+        </div>
+        <div class="background-image-container mt-4">
+          <img
+            src="/assets/images/Presentation_image.png"
+            alt="Game Background"
+            class="background-image"
+          />
+        </div>
       </div>
-      <div class="background-image-container mt-4">
-        <img
-          src="/assets/images/Presentation_image.png"
-          alt="Game Background"
-          class="background-image"
-        />
-      </div>
-    </div>
     </div>
 
     <div
@@ -67,15 +67,41 @@
       class="d-flex flex-column gap-3 position-relative"
       style="padding-top: 100px"
     >
+      <div class="d-flex justify-content-center w-100">
+        <img
+          id="title-gold-rush"
+          src="/assets/images/Gold-Rush-2-11-2024.png"
+          alt="title-gold-rush"
+        />
+      </div>
+
+      <div></div>
+
       <div id="hurra-hormiga" role="alert"></div>
       <div id="hurra-oro" role="alert"></div>
 
       <div class="card">
         <div class="card-body fs-3 text-center">
-          Onzas de<span style="color: gold"> Oro</span>: 0 oz Euros: 0,0 €.
+          <img
+            src="/assets/images/e095ca681225c1f7cfb9aca35d3669.png"
+            alt="Oro"
+            class="oro-image"
+          />
+          0oz
+          <img
+            src="/assets/images/euro-symbol.png"
+            alt="euro-image"
+            class="euro-image"
+          />
+          0,0€.
         </div>
       </div>
       <canvas id="canvas" width="800" height="800"></canvas>
+      <div class="card">
+        <div id="highest-score" class="card-body fs-3 text-center">
+          Highest Score: 0€
+        </div>
+      </div>
     </div>
 
     <!-- getbootstrap -->

@@ -20,17 +20,22 @@ class Game {
     ];
 
     this.onza = 0;
+    this.highestScore = parseFloat(localStorage.getItem("highestScore")) || 0;
 
     this.cuadradosVacios = [];
     this.updateCuadradosVacios();
 
-    this.hormigas = [new Hormiga(ctx, this.posicionInicialHormiga())];
+    this.hormigas = [
+      new Hormiga(ctx, this.posicionInicialHormiga()),
+      new Hormiga(ctx, this.posicionInicialHormiga()),
+    ];
 
     this.setListeners();
 
     this.audio = new Audio("/assets/audio/ralf.mp3");
     this.audio.volume = 0.2;
     this.audio.loop = true;
+    this.audio.play();
 
     this.backgroundImage = new Image();
     this.backgroundImage.src = "/assets/images/fondo_juego.jpg";
@@ -38,7 +43,7 @@ class Game {
 
   start() {
     if (!this.started || this.paused) {
-      // this.audio.play()
+      // this.audio.play();
       this.paused = false;
       this.started = true;
       this.interval = setInterval(() => {
@@ -61,9 +66,9 @@ class Game {
   }
 
   gameOver() {
-    // const audioGameOver = new Audio("/assets/audio");
-    // audioGameOver.volume = 0.2;
-    // audioGameOver.play();
+    const audioGameOver = new Audio("/assets/audio/game-over.mp3");
+    audioGameOver.volume = 0.2;
+    audioGameOver.play();
     this.pause();
     document.getElementById("gameOver").style.display = "block";
   }
@@ -79,7 +84,7 @@ class Game {
 
     this.moreGolds.forEach((oro) => {
       oro.draw();
-      console.log("Drawing gold at:", oro.x, oro.y);
+      // console.log("Drawing gold at:", oro.x, oro.y);
     });
 
     this.miner.draw();
@@ -87,8 +92,6 @@ class Game {
     this.hormigas.forEach((hormiga) => {
       hormiga.draw();
     });
-
-    // console.log(this.moreGolds)
   }
 
   move() {
@@ -105,7 +108,7 @@ class Game {
   }
 
   addGold() {
-    const randomScores = [1, 2, 5];
+    const randomScores = [1, 2, 5, 10];
     const randomScore =
       randomScores[Math.floor(Math.random() * randomScores.length)];
     const nuevoOro = new Gold(this.ctx, this.cuadradosTierra, randomScore);
@@ -141,7 +144,7 @@ class Game {
   }
 
   onGoldCollected(oro) {
-    console.log(this.moreGolds);
+    this.addGold();
     this.addGold();
     const alertBox = document.getElementById("hurra-oro");
     alertBox.classList.add("alert", "alert-warning");
@@ -150,9 +153,11 @@ class Game {
 
     this.onza += oro.score;
     const scoreElement = document.getElementsByClassName("card-body");
-    scoreElement[0].innerHTML = `Onzas de <span style="color: gold;">Oro</span>: ${
+    scoreElement[0].innerHTML = `<img src="/assets/images/e095ca681225c1f7cfb9aca35d3669.png" alt="Oro" class="oro-image"> ${
       this.onza
-    } oz Euros: ${(this.onza * 2549.94).toLocaleString("es-ES", {
+    } oz <img src="/assets/images/euro-symbol.png" alt="euro-image" class="euro-image"> ${(
+      this.onza * 2549.94
+    ).toLocaleString("es-ES", {
       minimumFractionDigits: 2,
     })}€.`;
 
@@ -162,8 +167,15 @@ class Game {
 
     this.addhormiga();
     this.addhormiga();
+    this.addhormiga();
 
-    // console.log(this.moreGolds)
+    if (this.onza*2549.94 > this.highestScore) {
+      this.highestScore = this.onza * 2549.94;
+      localStorage.setItem("highestScore", this.highestScore);
+          const score = document.getElementById('highest-score').innerText = `Highest Score: ${this.highestScore}€`
+    }
+
+
   }
 
   checkCollisions() {
@@ -183,48 +195,16 @@ class Game {
 
     collectedGolds.forEach((oro) => this.onGoldCollected(oro));
 
-    // this.moreGolds = this.moreGolds.filter((oro) => {
-    //   if (this.miner.collides(oro)) {
-    //     this.onGoldCollected(oro);
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // });
-
-    // if (this.miner.collides(this.gold)) {
-    //   const alertBox = document.getElementById("hurra-oro");
-    //   alertBox.classList.add("alert", "alert-warning");
-    //   alertBox.innerText = "¡Hurra Oro!";
-    //   alertBox.style.display = "block";
-
-    //   this.onza += 1;
-    //   const scoreElement = document.getElementsByClassName("card-body");
-    //   scoreElement[0].innerHTML = `Onzas de <span style="color: gold;">Oro</span>: ${
-    //     this.onza
-    //   } oz Euros: ${(this.onza * 2549.94).toLocaleString("es-ES", {
-    //     minimumFractionDigits: 2,
-    //   })}€.`;
-
-    //   setTimeout(() => {
-    //     alertBox.style.display = "none";
-    //   }, 1500);
-
-    //   this.gold = new Gold(this.ctx, this.cuadradosTierra);
-    //   console.log("Hurra ORO");
-
-    //   this.addhormiga();
-    //   this.addhormiga();
-    // }
-
     this.hormigas.forEach((hormiga) => {
       if (this.miner.collides(hormiga)) {
         console.log("prueba choque hormiga");
-        this.onza -= 0.5;
+        this.onza -= 2;
         const scoreElement = document.getElementsByClassName("card-body");
-        scoreElement[0].innerHTML = `Onzas de <span style="color: gold;">Oro</span>: ${
+        scoreElement[0].innerHTML = `<img src="/assets/images/e095ca681225c1f7cfb9aca35d3669.png" alt="Oro" class="oro-image"> ${
           this.onza
-        } oz Euros: ${(this.onza * 2549.94).toLocaleString("es-ES", {
+        }oz <img src="/assets/images/euro-symbol.png" alt="euro-image" class="euro-image">${(
+          this.onza * 2549.94
+        ).toLocaleString("es-ES", {
           minimumFractionDigits: 2,
         })}€.`;
 

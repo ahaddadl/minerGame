@@ -1,16 +1,21 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-  }
-
-#canvas {
-    border: 2px solid black;
+  background-image: url("/assets/images/2108.q703.021.F.m004.c7.mining\ miner\ cartoon.jpg");
+  background-size: cover; /* Scales the image to cover the entire body */
+  background-repeat: no-repeat; /*Prevents repeating of the image */
+  background-attachment: fixed; /* Keeps the background fixed on scroll */
+  background-position: center;
 }
 
+#canvas {
+  border: 2px solid black;
+}
 
 .presentation-overlay {
   position: fixed;
@@ -42,4 +47,18 @@ body, html {
   width: 100%;
   max-height: 200px;
   object-fit: contain;
+}
+
+.oro-image {
+  height: 75px;
+}
+
+.euro-image {
+  height: 55px;
+}
+
+#title-gold-rush {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
 }

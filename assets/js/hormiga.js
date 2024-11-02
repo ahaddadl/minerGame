@@ -19,6 +19,10 @@ class Hormiga {
   draw() {
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(this.x, this.y, this.w, this.h);
+
+    this.ctx.strokeStyle = "white"; 
+    this.ctx.lineWidth = 1.5; 
+    this.ctx.strokeRect(this.x, this.y, this.w, this.h);
   }
 
   move(cuadrosVacios) {
