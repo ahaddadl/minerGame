@@ -35,7 +35,7 @@ class Game {
     this.audio = new Audio("/assets/audio/ralf.mp3");
     this.audio.volume = 0.2;
     this.audio.loop = true;
-    this.audio.play();
+    // this.audio.play();
 
     this.backgroundImage = new Image();
     this.backgroundImage.src = "/assets/images/fondo_juego.jpg";
@@ -43,7 +43,7 @@ class Game {
 
   start() {
     if (!this.started || this.paused) {
-      // this.audio.play();
+      this.audio.play();
       this.paused = false;
       this.started = true;
       this.interval = setInterval(() => {
@@ -169,13 +169,13 @@ class Game {
     this.addhormiga();
     this.addhormiga();
 
-    if (this.onza*2549.94 > this.highestScore) {
+    if (this.onza * 2549.94 > this.highestScore) {
       this.highestScore = this.onza * 2549.94;
       localStorage.setItem("highestScore", this.highestScore);
-          const score = document.getElementById('highest-score').innerText = `Highest Score: ${this.highestScore}€`
+      const score = (document.getElementById(
+        "highest-score"
+      ).innerText = `Highest Score: ${this.highestScore}€`);
     }
-
-
   }
 
   checkCollisions() {

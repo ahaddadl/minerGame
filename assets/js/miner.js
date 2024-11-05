@@ -5,7 +5,7 @@ class Miner {
     this.img = new Image();
     this.img.frames = 10;
     this.img.frameIndex = 0;
-    this.img.src = "/assets/images/Minning.png";
+    this.img.src = "/assets/images/minning2.png";
 
     this.tick = 0;
 
@@ -40,7 +40,7 @@ class Miner {
 
     this.tick++;
 
-    if (this.tick > 10) {
+    if (this.tick > 4) {
       this.tick = 0;
 
       this.img.frameIndex++;
